@@ -1,26 +1,23 @@
 package com.example.alexander.node;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.alexander.node.Abstract.INoteRepository;
+import com.example.alexander.node.Concrete.NoteRepository;
+import com.example.alexander.node.Model.Note;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
-        adapter.addAll(Note.getFakeItems());
+        INoteRepository rn = new NoteRepository(this);
+        adapter.addAll(rn.getNotes(0));
         
         Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mActionBarToolbar);
@@ -66,12 +64,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*INoteRepository rn = new NoteRepository(this);
+        rn.getNotes(0);
+        rn.getNote(1);*/
     }
 
     private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         private ArrayList<Note> items = new ArrayList<>();
 
-        public void addAll(List<Note> fakeItems) {
+        public void addAll(Collection<Note> fakeItems) {
             int pos = getItemCount();
             this.items.addAll(fakeItems);
             notifyItemRangeInserted(pos, this.items.size());
