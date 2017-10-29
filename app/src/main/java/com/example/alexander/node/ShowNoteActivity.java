@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alexander.node.Abstract.INoteRepository;
+import com.example.alexander.node.Concrete.FactoryNoteRepository;
 import com.example.alexander.node.Model.Note;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ShowNoteActivity extends AppCompatActivity {
@@ -34,7 +37,18 @@ public class ShowNoteActivity extends AppCompatActivity {
 
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
-        adapter.addAll(Note.getFakeItems());
+
+        FactoryNoteRepository f = new FactoryNoteRepository(this);
+        final INoteRepository r = f.getRepository();
+        Intent intent = getIntent();
+        final int idNote = intent.getIntExtra("id_note",0);
+        adapter.addAll(r.getChildsNote(idNote));
+
+        Note note = r.getNote(idNote);
+        TextView noteText = (TextView) findViewById(R.id.note2);
+        noteText.setText(note.getNoteText());
+        TextView title = (TextView) findViewById(R.id.title2);
+        title.setText(note.getTitle());
 
         editNote = (ImageView) findViewById(R.id.editNote);
         editNote.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +63,7 @@ public class ShowNoteActivity extends AppCompatActivity {
         deleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("DeleteNote");
+               r.deleteNote(idNote);
             }
         });
 
@@ -58,7 +72,7 @@ public class ShowNoteActivity extends AppCompatActivity {
     private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         private ArrayList<Note> items = new ArrayList<>();
 
-        public void addAll(List<Note> fakeItems) {
+        public void addAll(Collection<Note> fakeItems) {
             int pos = getItemCount();
             this.items.addAll(fakeItems);
             notifyItemRangeInserted(pos, this.items.size());

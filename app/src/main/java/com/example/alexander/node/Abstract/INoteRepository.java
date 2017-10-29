@@ -9,7 +9,8 @@ import java.util.Collection;
  */
 
 public interface INoteRepository {
-    Collection<Note> getNotes(int id);
+    Collection<Note> getFavoriteNotes();
+    Collection<Note> getChildsNote(int id);
     Note getNote(int id);
     int deleteNote(int id);
     void saveNote(Note note);

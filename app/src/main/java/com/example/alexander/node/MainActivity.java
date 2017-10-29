@@ -39,7 +39,12 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
         INoteRepository rn = new NoteRepository(this);
-        adapter.addAll(rn.getNotes(0));
+        /*Note note = new Note();
+        note.setNoteText("заметка5");
+        note.setIdParent(1);
+        rn.saveNote(note);/**/
+        //rn.deleteNote(2);
+        adapter.addAll(rn.getChildsNote(0));
         
         Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mActionBarToolbar);
@@ -63,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        /*INoteRepository rn = new NoteRepository(this);
-        rn.getNotes(0);
-        rn.getNote(1);*/
     }
 
     private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         private TextView noteText;
         private TextView title;
+        private int idNote;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, ShowNoteActivity.class);
+                    intent.putExtra("id_note", idNote);
                     startActivity(intent);
                 }
             });
@@ -119,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         public void bind(Note note) {
             noteText.setText(note.getNoteText());
             title.setText(note.getTitle());
+            idNote = note.getId();
         }
     }
 
