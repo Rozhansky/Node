@@ -14,7 +14,10 @@ import android.widget.TextView;
 
 import com.example.alexander.node.Abstract.INoteRepository;
 import com.example.alexander.node.Concrete.NoteRepository;
+import com.example.alexander.node.Model.Image;
 import com.example.alexander.node.Model.Note;
+
+import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,17 +38,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
         LinearLayoutManager verticalLinearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(verticalLinearLayoutManager);
-
-        adapter = new RecyclerAdapter();
-        recyclerView.setAdapter(adapter);
         INoteRepository rn = new NoteRepository(this);
-        /*Note note = new Note();
-        note.setNoteText("заметка5");
-        note.setIdParent(1);
+        adapter = new RecyclerAdapter(rn,0);
+
+        recyclerView.setAdapter(adapter);
+
+        Note note = new Note();
+        note.setNoteText("с картинкой");
+        ArrayList<Image> list= new ArrayList<>();
+        Image im = new Image();
+        im.setPath("/mnt/sdcard/KatePhotos/1474327621.jpg");
+        list.add(im);
+        note.setImages(list);
         rn.saveNote(note);/**/
         //rn.deleteNote(2);
-        adapter.addAll(rn.getChildsNote(0));
-        
+        //adapter.addAll(rn.getChildsNote(0));
+
         Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mActionBarToolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -68,62 +76,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
+                intent.putExtra("note", new Note());
+                startActivity(intent);
+            }
+        });
     }
 
-    private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
-        private ArrayList<Note> items = new ArrayList<>();
-
-        public void addAll(Collection<Note> fakeItems) {
-            int pos = getItemCount();
-            this.items.addAll(fakeItems);
-            notifyItemRangeInserted(pos, this.items.size());
-        }
-
-        @Override
-        public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            System.out.println("height " + parent.getHeight() + "   " + parent.toString());
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
-
-            return new RecyclerViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerViewHolder holder, int position){
-            holder.bind(items.get(position));
-        }
-
-        @Override
-        public int getItemCount(){
-            return items.size();
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.update();
     }
-
-    private class RecyclerViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView noteText;
-        private TextView title;
-        private int idNote;
-
-        public RecyclerViewHolder(View itemView) {
-            super(itemView);
-            noteText = (TextView) itemView.findViewById(R.id.note);
-            title = (TextView) itemView.findViewById(R.id.title);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, ShowNoteActivity.class);
-                    intent.putExtra("id_note", idNote);
-                    startActivity(intent);
-                }
-            });
-        }
-
-        public void bind(Note note) {
-            noteText.setText(note.getNoteText());
-            title.setText(note.getTitle());
-            idNote = note.getId();
-        }
-    }
-
 }

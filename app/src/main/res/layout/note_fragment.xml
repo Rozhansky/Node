@@ -14,27 +14,32 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/note2"
+            android:id="@+id/title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="saff"
 
             />
-
-        <TextView
-            android:id="@+id/title2"
+        <ImageView
+            android:id="@+id/imageNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/note2"
-            android:text="saff"
+            android:layout_below="@+id/title2"
+            />
+
+        <TextView
+            android:id="@+id/note2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageNote"
             android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/deleteNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title2"
+            android:layout_below="@+id/note2"
             android:src="@drawable/delete_min" />
 
         <ImageView
@@ -42,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/pencil"
-            android:layout_below="@+id/title2"
+            android:layout_below="@+id/note2"
             android:layout_alignParentEnd="true" />
 
 

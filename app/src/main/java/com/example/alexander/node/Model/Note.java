@@ -1,5 +1,6 @@
 package com.example.alexander.node.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by Alexander on 29.09.2017.
  */
 
-public class Note {
+public class Note implements Serializable{
     private int id;
     private int idParent;
     private String noteText;
@@ -46,25 +47,10 @@ public class Note {
     }
 
     public String getTitle(){
-        if(noteText.length() > 10){
+        /*if(noteText.length() > 10){
             return noteText.substring(0,10).concat("...");
-        }
-        return noteText;
-    }
-
-    public static List<Note> getFakeItems(){
-        ArrayList<Note> itemsList = new ArrayList<>();
-        /*itemsList.add(new Note("aaaaa","asdsa"));
-        itemsList.add(new Note("sssss","asdsa"));
-        itemsList.add(new Note("ddddd","asdsa"));
-        itemsList.add(new Note("fffff","asdsa"));
-        itemsList.add(new Note("gggggg","asdsa"));
-        itemsList.add(new Note("hhhhhh","asdsa"));
-        itemsList.add(new Note("jjjjj","asdsa"));
-        itemsList.add(new Note("kkkkkk","asdsa"));
-        itemsList.add(new Note("llllll","asdsa"));
-        itemsList.add(new Note("nnnnn","asdsa"));*/
-        return itemsList;
+        }*/
+        return "";
     }
 
     public int getId() {
