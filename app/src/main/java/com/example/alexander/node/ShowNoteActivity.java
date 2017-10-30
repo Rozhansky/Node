@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,7 @@ public class ShowNoteActivity extends AppCompatActivity {
                 im.setImageBitmap(Const.getBitMap(image.getPath()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                Log.d(Const.LOG,e.getMessage());
             }
         }
     }

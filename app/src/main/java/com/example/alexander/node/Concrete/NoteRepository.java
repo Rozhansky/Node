@@ -96,7 +96,7 @@ public class NoteRepository implements INoteRepository {
         String table = "note as N left join image as I on N.id = I.id_note";
         String columns[] = {"N.id as id_note", "id_parent", "str", "rate", "favorite", "I.id as id_image", "pos", "path"};
         c = db.query(table, columns, "N.id = ?", new String[]{String.valueOf(id)}, null, null, null);
-       // c = db.query(table, columns, null, null, null, null, null);
+        // c = db.query(table, columns, null, null, null, null, null);
         if (c.moveToFirst()) {
             int idNoteColIndex = c.getColumnIndex("id_note");
             int idImageColIndex = c.getColumnIndex("id_image");
@@ -124,6 +124,14 @@ public class NoteRepository implements INoteRepository {
                     result.getImages().add(image);
                 }
             } while (c.moveToNext());
+        }
+        c = db.query("image", null, null, null, null, null, null);
+        while (c.moveToNext()) {
+            StringBuilder sb = new StringBuilder();
+            for (String str : c.getColumnNames()) {
+                sb.append(" - ").append(str).append(":").append(c.getString(c.getColumnIndex(str)));
+            }
+            Log.d(Const.LOG,sb.toString());
         }
         Log.d(Const.LOG, "end getNote");
         c.close();
@@ -163,7 +171,8 @@ public class NoteRepository implements INoteRepository {
 
         if (note.getId() == 0) {
             Log.d(Const.LOG, "create");
-            db.insert("note", null, cv);
+            long id = db.insert("note", null, cv);
+            note.setId((int)id);
         } else {
             Log.d(Const.LOG, "update");
             String[] temp = new String[]{String.valueOf(note.getId())};
