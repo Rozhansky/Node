@@ -18,12 +18,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/title"
                 android:layout_alignParentTop="true" />
+
             <TextView
+                android:id="@+id/note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:id="@+id/note"
-                android:layout_below="@+id/title" />
+                android:layout_below="@+id/title"
+                android:maxLength="50"
+                android:maxLines="5"
+                android:textSize="30sp" />
 
 
         </RelativeLayout>
