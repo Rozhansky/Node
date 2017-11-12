@@ -67,8 +67,8 @@ public class ShowNoteActivity extends AppCompatActivity {
         note = r.getNote(idNote);
         noteText = (TextView) findViewById(R.id.note2);
         noteText.setText(note.getNoteText());
-        title = (TextView) findViewById(R.id.title2);
-        title.setText(note.getTitle());
+        /*title = (TextView) findViewById(R.id.title2);
+        title.setText(note.getTitle());*/
 
         editNote = (ImageView) findViewById(R.id.editNote);
         editNote.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +101,7 @@ public class ShowNoteActivity extends AppCompatActivity {
             }
         });
 
-        ImageView im = (ImageView)findViewById(R.id.imageNote);
+        /*ImageView im = (ImageView)findViewById(R.id.imageNote);
         for (Image image : note.getImages()) {
             try {
                 im.setImageBitmap(Const.getBitMap(image.getPath()));
@@ -109,7 +109,7 @@ public class ShowNoteActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Log.d(Const.LOG,e.getMessage());
             }
-        }
+        }*/
     }
     @Override
     protected void onResume() {
@@ -117,6 +117,6 @@ public class ShowNoteActivity extends AppCompatActivity {
         note = r.getNote(note.getId());
         adapter.update();
         noteText.setText(note.getNoteText());
-        title.setText(note.getTitle());
+//        title.setText(note.getTitle());
     }
 }

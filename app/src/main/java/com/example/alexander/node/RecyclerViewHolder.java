@@ -21,7 +21,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     public RecyclerViewHolder(View itemView,final Context context) {
         super(itemView);
         noteText = (TextView) itemView.findViewById(R.id.note);
-        title = (TextView) itemView.findViewById(R.id.title);
+        //title = (TextView) itemView.findViewById(R.id.title);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +35,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(Note note) {
         noteText.setText(note.getNoteText());
-        title.setText(note.getTitle());
+//        title.setText(note.getTitle());
         idNote = note.getId();
     }
 }
