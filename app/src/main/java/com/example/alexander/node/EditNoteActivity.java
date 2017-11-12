@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -19,24 +22,39 @@ import com.example.alexander.node.Model.Note;
 
 public class EditNoteActivity extends AppCompatActivity {
 
+    private CardView cardView;
+    private Note note;
+    private EditText editText;
+    private INoteRepository nr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_note);
-        final CardView cardView = (CardView) findViewById(R.id.card3);
+
+        android.support.v7.widget.Toolbar tb = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(tb);
+        tb.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
+        cardView = (CardView) findViewById(R.id.card3);
         Intent intent = getIntent();
-        final Note note = (Note)intent.getSerializableExtra("note");
-        ImageView saveNote = (ImageView) findViewById(R.id.saveNote);
-        final EditText editText = (EditText) findViewById(R.id.editText);
+         note = (Note)intent.getSerializableExtra("note");
+        //ImageView saveNote = (ImageView) findViewById(R.id.saveNote);
+        editText = (EditText) findViewById(R.id.editText);
         editText.setText(note.getNoteText());
         final FactoryNoteRepository fr = new FactoryNoteRepository(this);
-        final INoteRepository nr =  fr.getRepository();
+        nr =  fr.getRepository();
 
 
-        /*editText.requestFocus();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);*/
+        cardView.requestFocus();
 
-        saveNote.setOnClickListener(new View.OnClickListener() {
+
+        /*saveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String str = editText.getText().toString();
@@ -44,7 +62,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 nr.saveNote(note);
                 finish();
             }
-        });
+        });*/
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,5 +77,23 @@ public class EditNoteActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.save_note){
+            String str = editText.getText().toString();
+            note.setNoteText(str);
+            nr.saveNote(note);
+            finish();
+        }
+        return true;
     }
 }

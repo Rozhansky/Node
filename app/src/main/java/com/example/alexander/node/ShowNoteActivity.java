@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.alexander.node.Abstract.INoteRepository;
 import com.example.alexander.node.Concrete.FactoryNoteRepository;
@@ -38,17 +39,23 @@ public class ShowNoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_note);
+
+        android.support.v7.widget.Toolbar tb = (android.support.v7.widget.Toolbar) findViewById(R.id.tb);
+        setSupportActionBar(tb);
+        tb.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         FactoryNoteRepository f = new FactoryNoteRepository(this);
         r = f.getRepository();
-
-
-        setContentView(R.layout.activity_show_note);
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler2);
         LinearLayoutManager verticalLinearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(verticalLinearLayoutManager);
-
-
 
         Intent intent = getIntent();
         final int idNote = intent.getIntExtra("id_note",0);

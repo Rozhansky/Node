@@ -19,6 +19,7 @@ android:layout_height="match_parent">
         app:layout_scrollFlags="scroll|enterAlways"
         />
 
+
 </android.support.design.widget.AppBarLayout>
 
 

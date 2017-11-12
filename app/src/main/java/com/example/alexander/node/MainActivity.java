@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        Note note = new Note();
+        /*Note note = new Note();
         note.setNoteText("с картинкой");
         ArrayList<Image> list= new ArrayList<>();
         Image im = new Image();
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mActionBarToolbar);
+
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                     if (!fab.isShown()) {
                         fab.show();
                     }
+                } else{
+                    fab.show();
                 }
             }
         });

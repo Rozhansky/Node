@@ -7,27 +7,43 @@
     android:orientation="vertical"
     tools:context="com.example.alexander.node.ShowNoteActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <fragment
         android:name="com.example.alexander.node.NoteFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:id="@+id/fr1">
 
     </fragment>
 
-    <fragment
-        android:name="com.example.alexander.node.ListNoteFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fr2">
+        <fragment
+            android:id="@+id/fr2"
+            android:name="com.example.alexander.node.ListNoteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fr1">
 
-    </fragment>
-    <android.support.design.widget.FloatingActionButton
+        </fragment>
+        </RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabNoteList"
-        android:layout_width="wrap_content"
+        android:layout_width="72dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/plus" />
-
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

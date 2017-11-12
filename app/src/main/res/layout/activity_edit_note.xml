@@ -9,60 +9,34 @@
     tools:context="com.example.alexander.node.ShowNoteActivity">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/card3"
-        card_view:cardCornerRadius="4dp"
-        android:layout_marginRight="8dp"
+        android:layout_below="@+id/toolbar2"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
+        card_view:cardCornerRadius="4dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
-            android:weightSum="100">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:padding="16dp"
-            android:id="@+id/editText"
-            android:layout_weight="10"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_weight="90">
-
-            <ImageView
-                android:id="@+id/undoNote"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/close"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true" />
-
-            <ImageView
-                android:id="@+id/saveNote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:src="@drawable/check"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-        </LinearLayout>
+                android:layout_weight="10"
+                android:background="#00000000"
+                android:padding="16dp" />
 
     </android.support.v7.widget.CardView>
-
-
-
-
-
 </RelativeLayout>
