@@ -2,6 +2,7 @@ package com.example.alexander.node;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class ShowNoteActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private ImageView editNote;
     private ImageView deleteNote;
+    private ImageView favoriteNote;
     TextView noteText;
     TextView title;
     private Note note;
@@ -89,6 +91,27 @@ public class ShowNoteActivity extends AppCompatActivity {
             }
         });
 
+        favoriteNote = (ImageView) findViewById(R.id.favoriteNote);
+        if(note.isFavorite()){
+            favoriteNote.setImageResource(R.drawable.star);
+        }else {
+            favoriteNote.setImageResource(R.drawable.star_outline);
+        }
+        favoriteNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(note.isFavorite()){
+                    note.setFavorite(false);
+                    r.saveNote(note);
+                    favoriteNote.setImageResource(R.drawable.star_outline);
+                } else {
+                    note.setFavorite(true);
+                    r.saveNote(note);
+                    favoriteNote.setImageResource(R.drawable.star);
+                }
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabNoteList);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,15 +124,6 @@ public class ShowNoteActivity extends AppCompatActivity {
             }
         });
 
-        /*ImageView im = (ImageView)findViewById(R.id.imageNote);
-        for (Image image : note.getImages()) {
-            try {
-                im.setImageBitmap(Const.getBitMap(image.getPath()));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Log.d(Const.LOG,e.getMessage());
-            }
-        }*/
     }
     @Override
     protected void onResume() {

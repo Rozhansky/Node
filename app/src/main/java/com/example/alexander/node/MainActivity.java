@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager verticalLinearLayoutManager;
     private RecyclerAdapter adapter;
     private FloatingActionButton fab;
+    private FloatingActionButton favoritesFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        /*Note note = new Note();
-        note.setNoteText("с картинкой");
-        ArrayList<Image> list= new ArrayList<>();
-        Image im = new Image();
-        im.setPath("/mnt/sdcard/KatePhotos/1474327621.jpg");
-        list.add(im);
-        note.setImages(list);
-        rn.saveNote(note);/**/
-        //rn.deleteNote(2);
-        //adapter.addAll(rn.getChildsNote(0));
-
-        Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mActionBarToolbar);
-
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -79,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else{
                     fab.show();
+                    //System.out.println("toolbar" + getSupportActionBar());
                 }
             }
         });
@@ -87,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
                 intent.putExtra("note", new Note());
+                startActivity(intent);
+
+            }
+        });
+
+        favoritesFAB = (FloatingActionButton) findViewById(R.id.fabFavotites);
+        favoritesFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FavoriteNotesActivity.class);
                 startActivity(intent);
             }
         });

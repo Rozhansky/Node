@@ -16,10 +16,14 @@ import java.util.Collection;
  */
 
 class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    private INoteRepository nr;
+    protected INoteRepository nr;
     private int level;
-    ArrayList<Note> notes;
+    protected ArrayList<Note> notes;
 
+    public RecyclerAdapter(INoteRepository nr) {
+        this.nr = nr;
+        this.level = 0;
+    }
     public RecyclerAdapter(INoteRepository nr, int level) {
         this.nr = nr;
         this.level = level;

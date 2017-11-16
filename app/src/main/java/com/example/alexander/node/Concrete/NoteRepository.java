@@ -44,6 +44,7 @@ public class NoteRepository implements INoteRepository {
                 note.setRate(c.getInt(rateColIndex));
                 note.setFavorite(c.getInt(favColIndex) == 1);
                 note.setNoteText(c.getString(strColIndex));
+                result.add(note);
             } while (c.moveToNext());
         }
         return result;

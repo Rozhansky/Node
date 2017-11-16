@@ -27,6 +27,7 @@ android:layout_height="match_parent">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycler"
+        android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
@@ -38,6 +39,14 @@ android:layout_height="match_parent">
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:src="@drawable/plus" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabFavotites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="16dp"
+        android:src="@drawable/star" />
 
 
 </android.support.design.widget.CoordinatorLayout>

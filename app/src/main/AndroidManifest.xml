@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShowNoteActivity" />
-        <activity android:name=".EditNoteActivity"></activity>
+        <activity android:name=".EditNoteActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name=".FavoriteNotesActivity" />
     </application>
 
 </manifest>
